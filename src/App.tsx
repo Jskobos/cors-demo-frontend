@@ -1,8 +1,14 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
+  const [response, setResponse] = React.useState<string>("waiting...");
+  React.useEffect(() => {
+    fetch("/ping").then((response) =>
+      response.json().then((json) => setResponse(json.response))
+    );
+  }, []);
   return (
     <div className="App">
       <header className="App-header">
@@ -16,7 +22,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          {response}
         </a>
       </header>
     </div>
